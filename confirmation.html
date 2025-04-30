@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Confirmation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #e6f2ff;
+            color: #202124;
+            line-height: 1.5;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        
+        .confirmation-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e1f5fe;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+        }
+        
+        .checkmark {
+            color: #3498db;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        h1 {
+            color: #3498db;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 24px;
+        }
+        
+        .response-details {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            margin-top: 30px;
+        }
+        
+        .response-details h2 {
+            font-size: 18px;
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+        
+        .response-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .response-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question {
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 4px;
+        }
+        
+        .answer {
+            color: #666;
+        }
+        
+        .return-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            margin-top: 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .return-btn:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        // Function to get URL parameters
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        
+        // Function to populate response details
+        window.onload = function() {
+            // Get form data from URL parameters
+            const fullName = getParameterByName('fullName');
+            const phone = getParameterByName('phone');
+            const gender = getParameterByName('gender');
+            const company = getParameterByName('company');
+            const email = getParameterByName('email');
+            const department = getParameterByName('department');
+            const address = getParameterByName('address');
+            
+            // Display form data in response details
+            if (fullName) document.getElementById('fullName').textContent = fullName;
+            if (phone) document.getElementById('phone').textContent = phone;
+            if (gender) {
+                let genderText = gender;
+                if (gender === 'prefer-not-to-say') genderText = 'Prefer not to say';
+                document.getElementById('gender').textContent = genderText.charAt(0).toUpperCase() + genderText.slice(1);
+            }
+            if (company) document.getElementById('company').textContent = company;
+            if (email) document.getElementById('email').textContent = email;
+            if (department) {
+                let deptText = department;
+                if (department === 'hr') deptText = 'HR';
+                else if (department === 'others') deptText = 'Others';
+                else deptText = department.charAt(0).toUpperCase() + department.slice(1);
+                document.getElementById('department').textContent = deptText;
+            }
+            if (address) document.getElementById('address').textContent = address;
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="confirmation-card">
+            <div class="confirmation-icon">
+                <span class="checkmark">✓</span>
+            </div>
+            <h1>Form Submitted Successfully!</h1>
+            <p>Thank you for submitting your contact information. We have received your details and will get back to you soon.</p>
+            
+            <div class="response-details">
+                <h2>Your Response</h2>
+                
+                <div class="response-item">
+                    <div class="question">Full Name:</div>
+                    <div class="answer" id="fullName">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Contact Number:</div>
+                    <div class="answer" id="phone">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Gender:</div>
+                    <div class="answer" id="gender">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Company Name:</div>
+                    <div class="answer" id="company">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Email Address:</div>
+                    <div class="answer" id="email">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Department:</div>
+                    <div class="answer" id="department">--</div>
+                </div>
+                
+                <div class="response-item">
+                    <div class="question">Address:</div>
+                    <div class="answer" id="address">--</div>
+                </div>
+            </div>
+            
+            <a href="index.html" class="return-btn">Submit Another Response</a>
+        </div>
+    </div>
+</body>
+</html>
